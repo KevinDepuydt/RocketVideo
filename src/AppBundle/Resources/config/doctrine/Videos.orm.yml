@@ -1,0 +1,63 @@
+AppBundle\Entity\Videos:
+    type: entity
+    table: videos
+    indexes:
+        fk_videos_stream_idx:
+            columns:
+                - stream_id
+        fk_videos_video_category1_idx:
+            columns:
+                - video_category_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        url:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+    manyToOne:
+        stream:
+            targetEntity: Stream
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                stream_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        videoCategory:
+            targetEntity: VideoCategory
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                video_category_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToMany:
+        watchlist:
+            targetEntity: Watchlist
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: videos
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

@@ -1,0 +1,66 @@
+AppBundle\Entity\Users:
+    type: entity
+    table: users
+    indexes:
+        fk_users_user_type1_idx:
+            columns:
+                - user_type_id
+        fk_users_watchlist1_idx:
+            columns:
+                - watchlist_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        email:
+            type: string
+            nullable: false
+            length: 150
+            options:
+                fixed: false
+        firstname:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        lastname:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        password:
+            type: string
+            nullable: false
+            length: 40
+            options:
+                fixed: false
+    manyToOne:
+        userType:
+            targetEntity: UserType
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        watchlist:
+            targetEntity: Watchlist
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                watchlist_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    {% stylesheets '@bootstrap_css' '@main_css' '@font_awesome_css' %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+
+    <title>{% block title %}{{ site_title }}{% endblock %}</title>
+</head>
+<body>
+
+{% block body %}
+{% endblock %}
+
+</body>
+</html>
