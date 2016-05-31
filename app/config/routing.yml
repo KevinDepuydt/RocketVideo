@@ -1,3 +1,27 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+app_index:
+    path:      /
+    defaults:  { _controller: AppBundle:Default:index }
+
+app_play:
+    path: /play/{id}
+    defaults:  { _controller: AppBundle:Default:play }
+    requirements:
+        id: \d+
+
+user_registration:
+    path: /registrer
+    defaults: { _controller: AppBundle:User:registrer }
+
+user_login:
+    path: /login
+    defaults: { _controller: AppBundle:User:login }
+
+user_login_check:
+    path: /login_check
+
+user_logout:
+    path: /logout
+
+user_account:
+    path: /user/account
+    defaults: { _controller: AppBundle:User:account }
