@@ -2,21 +2,37 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection,
-    AppBundle\Entity\Videos;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Watchlist
+ *
+ * @ORM\Table(name="watchlist")
+ * @ORM\Entity
  */
 class Watchlist
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Videos", inversedBy="watchlist")
+     * @ORM\JoinTable(name="watchlist_has_videos",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="watchlist_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="videos_id", referencedColumnName="id")
+     *   }
+     * )
      */
     private $videos;
 
@@ -25,51 +41,8 @@ class Watchlist
      */
     public function __construct()
     {
-        $this->videos = new ArrayCollection();
+        $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add video
-     *
-     * @param \AppBundle\Entity\Videos $video
-     *
-     * @return Watchlist
-     */
-    public function addVideo(Videos $video)
-    {
-        $this->videos[] = $video;
-
-        return $this;
-    }
-
-    /**
-     * Remove video
-     *
-     * @param \AppBundle\Entity\Videos $video
-     */
-    public function removeVideo(Videos $video)
-    {
-        $this->videos->removeElement($video);
-    }
-
-    /**
-     * Get videos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getVideos()
-    {
-        return $this->videos;
-    }
 }
 

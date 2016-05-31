@@ -2,31 +2,41 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Stream
+ *
+ * @ORM\Table(name="stream")
+ * @ORM\Entity
  */
 class Stream
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="path", type="text", length=65535, nullable=false)
      */
     private $path;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="quality", type="string", length=45, nullable=true)
      */
     private $quality;
 
-
     /**
-     * Get id
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -34,22 +44,14 @@ class Stream
     }
 
     /**
-     * Set path
-     *
-     * @param string $path
-     *
-     * @return Stream
+     * @param int $id
      */
-    public function setPath($path)
+    public function setId($id)
     {
-        $this->path = $path;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get path
-     *
      * @return string
      */
     public function getPath()
@@ -58,27 +60,29 @@ class Stream
     }
 
     /**
-     * Set quality
-     *
-     * @param string $quality
-     *
-     * @return Stream
+     * @param string $path
      */
-    public function setQuality($quality)
+    public function setPath($path)
     {
-        $this->quality = $quality;
-
-        return $this;
+        $this->path = $path;
     }
 
     /**
-     * Get quality
-     *
      * @return string
      */
     public function getQuality()
     {
         return $this->quality;
     }
+
+    /**
+     * @param string $quality
+     */
+    public function setQuality($quality)
+    {
+        $this->quality = $quality;
+    }
+
+
 }
 

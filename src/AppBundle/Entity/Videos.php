@@ -2,43 +2,63 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection,
-    AppBundle\Entity\Stream,
-    AppBundle\Entity\Watchlist,
-    AppBundle\Entity\VideoCategory;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Videos
+ *
+ * @ORM\Table(name="videos", indexes={@ORM\Index(name="fk_videos_stream_idx", columns={"stream_id"}), @ORM\Index(name="fk_videos_video_category1_idx", columns={"video_category_id"})})
+ * @ORM\Entity
  */
 class Videos
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=45, nullable=false)
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="url", type="text", length=65535, nullable=false)
      */
     private $url;
 
     /**
      * @var \AppBundle\Entity\Stream
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Stream")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="stream_id", referencedColumnName="id")
+     * })
      */
     private $stream;
 
     /**
      * @var \AppBundle\Entity\VideoCategory
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\VideoCategory")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="video_category_id", referencedColumnName="id")
+     * })
      */
     private $videoCategory;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Watchlist", mappedBy="videos")
      */
     private $watchlist;
 
@@ -47,147 +67,8 @@ class Videos
      */
     public function __construct()
     {
-        $this->watchlist = new ArrayCollection();
+        $this->watchlist = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Videos
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set url
-     *
-     * @param string $url
-     *
-     * @return Videos
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Set stream
-     *
-     * @param \AppBundle\Entity\Stream $stream
-     *
-     * @return Videos
-     */
-    public function setStream(Stream $stream = null)
-    {
-        $this->stream = $stream;
-
-        return $this;
-    }
-
-    /**
-     * Get stream
-     *
-     * @return \AppBundle\Entity\Stream
-     */
-    public function getStream()
-    {
-        return $this->stream;
-    }
-
-    /**
-     * Set videoCategory
-     *
-     * @param \AppBundle\Entity\VideoCategory $videoCategory
-     *
-     * @return Videos
-     */
-    public function setVideoCategory(VideoCategory $videoCategory = null)
-    {
-        $this->videoCategory = $videoCategory;
-
-        return $this;
-    }
-
-    /**
-     * Get videoCategory
-     *
-     * @return \AppBundle\Entity\VideoCategory
-     */
-    public function getVideoCategory()
-    {
-        return $this->videoCategory;
-    }
-
-    /**
-     * Add watchlist
-     *
-     * @param \AppBundle\Entity\Watchlist $watchlist
-     *
-     * @return Videos
-     */
-    public function addWatchlist(Watchlist $watchlist)
-    {
-        $this->watchlist[] = $watchlist;
-
-        return $this;
-    }
-
-    /**
-     * Remove watchlist
-     *
-     * @param \AppBundle\Entity\Watchlist $watchlist
-     */
-    public function removeWatchlist(Watchlist $watchlist)
-    {
-        $this->watchlist->removeElement($watchlist);
-    }
-
-    /**
-     * Get watchlist
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getWatchlist()
-    {
-        return $this->watchlist;
-    }
 }
 

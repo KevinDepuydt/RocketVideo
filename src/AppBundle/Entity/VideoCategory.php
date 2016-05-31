@@ -2,26 +2,34 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * VideoCategory
+ *
+ * @ORM\Table(name="video_category")
+ * @ORM\Entity
  */
 class VideoCategory
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=45, nullable=false)
      */
     private $name;
 
-
     /**
-     * Get id
-     *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -29,27 +37,29 @@ class VideoCategory
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return VideoCategory
+     * @param int $id
      */
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
     {
         return $this->name;
     }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+
 }
 
