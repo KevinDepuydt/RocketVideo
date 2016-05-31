@@ -1,10 +1,7 @@
-AppBundle\Entity\Users:
+AppBundle\Entity\User:
     type: entity
-    table: users
+    table: user
     indexes:
-        fk_users_user_type1_idx:
-            columns:
-                - user_type_id
         fk_users_watchlist1_idx:
             columns:
                 - watchlist_id
@@ -24,35 +21,31 @@ AppBundle\Entity\Users:
             length: 150
             options:
                 fixed: false
-        firstname:
-            type: string
-            nullable: false
-            length: 45
-            options:
-                fixed: false
-        lastname:
-            type: string
-            nullable: false
-            length: 45
-            options:
-                fixed: false
         password:
             type: string
             nullable: false
             length: 40
             options:
                 fixed: false
+        username:
+            type: string
+            nullable: false
+            length: 45
+            options:
+                fixed: false
+        salt:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        roles:
+            type: array
+            nullable: false
+            length: null
+            options:
+                fixed: false
     manyToOne:
-        userType:
-            targetEntity: UserType
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                user_type_id:
-                    referencedColumnName: id
-            orphanRemoval: false
         watchlist:
             targetEntity: Watchlist
             cascade: {  }

@@ -1,0 +1,16 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Error{% endblock %}
+
+{% block body %}
+    <h1 class="site-title">{{ site_title }} <i class="fa fa-rocket" aria-hidden="true"></i></h1>
+
+    <h2>Oops! An Error Occurred - 404</h2>
+    <h3>The server returned a "{{ status_code }} {{ status_text }}".</h3>
+
+    <div>
+        Something is broken. Please e-mail us at [email] and let us know
+        what you were doing when this error occurred. We will fix it as soon
+        as possible. Sorry for any inconvenience caused.
+    </div>
+{% endblock %}

@@ -10,34 +10,17 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use AppBundle\Form\Type\StreamType;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
+
     public function indexAction(Request $request)
     {
-
-        // just setup a fresh $task object (remove the dummy data)
         $stream = new Stream();
 
-        $form = $this->createFormBuilder($stream)
-            ->add('path', TextType::class, array(
-                'label' => false,
-                'attr' => array(
-                    'class' => 'input-add-video',
-                    'placeholder' => 'Coller le lien de la vidéo ici'
-                )
-            ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Charger la vidéo',
-                'attr' => array(
-                    'class' => 'btn-add-video'
-                )
-            ))
-            ->getForm();
-
+        $form = $this->createForm(StreamType::class, $stream);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -46,14 +29,26 @@ class DefaultController extends Controller
             $em->persist($stream);
             $em->flush();
 
-            $request->getSession()->set('form_message', 'Annonce bien enregistrée.');
-
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('app_play', array('id' => $stream->getId()));
         }
 
-        // replace this example code with whatever you need
         return $this->render('AppBundle::index.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    public function playAction($id)
+    {
+        $stream = $this->getDoctrine()
+            ->getRepository('AppBundle:Stream')
+            ->find($id);
+
+        if (!$stream) {
+            throw $this->createNotFoundException('The product does not exist');
+        }
+
+        return $this->render('AppBundle::play.html.twig', [
+            'stream' => $stream
         ]);
 
     }
