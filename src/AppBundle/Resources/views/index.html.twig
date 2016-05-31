@@ -3,13 +3,12 @@
 {% block title %}{{ parent() }} - Home{% endblock %}
 
 {% block body %}
-    <h1 class="site-title">{{ site_title }} <i class="fa fa-rocket" aria-hidden="true"></i></h1>
-    <h3 class="slogan">Coller n'importe quel lien de vidéo pour la lire</h3>
 
+    {# Include menu #}
+    {{ include("AppBundle::includes/menu.html.twig") }}
 
-    <div class="form-response">
-        {{ app.session.get('form_message') }}
-    </div>
+    <h3 class="slogan margin-t-50 margin-b-20">Coller le lien de votre vidéo ci-dessous</h3>
+
     <div class="container">
         {{ form_start(form) }}
         {{ form_widget(form) }}

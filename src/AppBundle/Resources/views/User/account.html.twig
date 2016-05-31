@@ -1,0 +1,15 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Mon compte{% endblock %}
+
+{% block body %}
+
+    {# Include menu #}
+    {{ include("AppBundle::includes/menu.html.twig") }}
+
+    <h1 class="page-title margin-b-20 margin-t-50">Mon compte</h1>
+
+    <div class="container margin-t-50">
+        Compte de l'utilisateur n° {{ user.id }} - {{ user.username }} ({{ user.email }})
+    </div>
+{% endblock %}

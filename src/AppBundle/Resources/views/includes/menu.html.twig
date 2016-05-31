@@ -1,0 +1,16 @@
+<div id="menu">
+    <div class="container">
+        <div class="left">
+            <a href="{{ path('app_index') }}" class="link-title"><h1 class="site-title">{{ site_title }} <i class="fa fa-rocket" aria-hidden="true"></i></h1></a>
+        </div>
+        <div class="right">
+            {% if app.user %}
+                <a href="{{ path('user_account') }}" class="btn-rv btn-rv-menu">Mon compte</a>
+                <a href="{{ path('user_logout') }}" class="btn-rv btn-rv-menu">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('user_registration') }}" class="btn-rv btn-rv-menu">Inscription</a>
+                <a href="{{ path('user_login') }}" class="btn-rv btn-rv-menu">Connexion</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
