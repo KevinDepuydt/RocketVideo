@@ -38,6 +38,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         site_title: "RocketVideo"
+        download_dir: /downloads
 
 # Assetic Configuration
 assetic:
