@@ -9,7 +9,26 @@
 
     <h1 class="page-title margin-b-20 margin-t-50">Mon compte</h1>
 
-    <div class="container margin-t-50">
-        Compte de l'utilisateur n° {{ user.id }} - {{ user.username }} ({{ user.email }})
+    <div class="container">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 margin-t-50">
+            <h3>Ma watchlist</h3>
+            <div>
+                <p>ID {{ user.watchlist.id }}</p>
+                <ul>
+                    {% if user.watchlist.streams %}
+                        {% for stream in user.watchlist.streams %}
+                            <li>{{ stream.path }}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 margin-t-50">
+            <h3>Mes informations</h3>
+            <div>
+                Compte de l'utilisateur n° {{ user.id }} - {{ user.username }} ({{ user.email }})
+            </div>
+        </div>
     </div>
 {% endblock %}

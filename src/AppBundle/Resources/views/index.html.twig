@@ -14,4 +14,36 @@
         {{ form_widget(form) }}
         {{ form_end(form) }}
     </div>
+
+    <div class="container margin-t-50 create-account">
+        {% if not app.user %}
+            <h2 class="section-title">Créez votre compte!</h2>
+            <div class="notice">
+                <div class="notice-icon">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </div>
+                <p>En créant votre compte vous pourrez ajouter des vidéos privé à votre watchlist !</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div id="streams" class="container">
+        <h2 class="section-title margin-b-20 margin-t-50">Vidéos publiques</h2>
+        {% if public_streams %}
+            {% for stream in public_streams %}
+                <div class="stream-item stream-{% if stream.state == 0 %}not-download{% elseif stream.state == 1 %}in-download-progress{% else %}downloaded{% endif %}">
+                    {{ stream.name }}
+                    <div class="stream-item-action" title="Video {% if stream.state == 0 %}non téléchargée{% elseif stream.state == 1 %}en cours de téléchargement{% else %}a voir dès maintenant{% endif %}">
+                        {% if stream.state == 0 %}
+                            <span><i class="fa fa-info" aria-hidden="true"></i></span>
+                        {% elseif stream.state == 1 %}
+                            <span><i class="fa fa-refresh fa-spin fa-fw"></i></span>
+                        {% else %}
+                            <a href="{{ path('app_play', { 'id': stream.id }) }}"><i class="fa fa-play" aria-hidden="true"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}

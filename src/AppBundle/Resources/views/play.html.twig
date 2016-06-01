@@ -9,29 +9,15 @@
 
     <div class="container wait-container margin-t-50">
         <div class="blue-dark-bg">
-            <p>Récupération de la vidéo situé a l'adresse : {{ stream.path }}</p>
-            <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
-        </div>
+            <p>Lecture de la vidéo {{ stream.name }}</p>
 
-        <div class="margin-t-50 create-account">
-            <h2 class="title-secondary">Créez votre compte!</h2>
-            <div class="notice">
-                <div class="notice-icon">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>
-                </div>
-                <p>
-                    En créant votre compte vous pourrez quittez l'application en attendant la fin du téléchargement de votre vidéo,
-                    elle sera ajoutée automatiquement à votre watchlist et un e-mail vous sera envoyé dès la fin du téléchargement !
+            <video id="my-video" class="video-js" controls preload="auto" height="auto" data-setup="{}">
+                <source src="{{ download_dir }}/{{ stream.path }}" type='video/mp4'>
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                 </p>
-            </div>
-
-            <p>Vous pourrez également par la suite</p>
-            <ul>
-                <li>Ajouter des vidéos à vôtre watchlist</li>
-                <li>Noter des vidéos</li>
-                <li>Partager des vidéos avec d'autres utilisateurs</li>
-                <li>Et pleins d'autre fonctionnalités à venir</li>
-            </ul>
+            </video>
         </div>
     </div>
 

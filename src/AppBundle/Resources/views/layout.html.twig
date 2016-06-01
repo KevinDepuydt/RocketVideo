@@ -6,6 +6,7 @@
     {% stylesheets '@bootstrap_css' '@main_css' '@font_awesome_css' %}
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
     {% endstylesheets %}
+    <link href="http://vjs.zencdn.net/5.10.2/video-js.css" rel="stylesheet">
 
     <title>{% block title %}{{ site_title }}{% endblock %}</title>
 </head>
@@ -13,6 +14,8 @@
 
 {% block body %}
 {% endblock %}
+
+<script src="http://vjs.zencdn.net/5.10.2/video.js"></script>
 
 </body>
 </html>
