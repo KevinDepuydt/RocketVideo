@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\Watchlist;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\Type\UserTypeRegistration;
@@ -19,15 +20,20 @@ class UserController extends Controller
     public function registrerAction(Request $request)
     {
         $user = new User();
+        $watchlist = new Watchlist();
 
         $form = $this->createForm(UserTypeRegistration::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setSalt('');
-            $user->setRoles(array('ROLE_USER'));
 
             $em = $this->getDoctrine()->getManager();
+
+            $user->setSalt('');
+            $user->setRoles(array('ROLE_USER'));
+            $user->setWatchlist($watchlist);
+
+            $em->persist($watchlist);
             $em->persist($user);
             $em->flush();
 
@@ -56,7 +62,7 @@ class UserController extends Controller
         if (!$user) {
             return $this->redirectToRoute('user_login');
         }
-
+        
         return $this->render('AppBundle:User:account.html.twig', [
             'user' => $user
         ]);
