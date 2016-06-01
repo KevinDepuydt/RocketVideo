@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Stream
 {
+    const STREAM_NOT_DOWNLOADED = 0;
+    const STREAM_DOWNLOAD_PROCESSING = 1;
+    const STREAM_DOWNLOADED = 2;
+
     /**
      * @var integer
      *
@@ -24,16 +28,35 @@ class Stream
     /**
      * @var string
      *
+     * @ORM\Column(name="name", type="text", nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="path", type="text", length=65535, nullable=false)
      */
     private $path;
 
     /**
+     * @var int
+     *
+     * O mean not downloaded
+     * 1 mean downloaded
+     *
+     * @ORM\Column(name="state", type="integer", nullable=false)
+     */
+    private $state = self::STREAM_NOT_DOWNLOADED;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="quality", type="string", length=45, nullable=true)
+     * @ORM\Column(name="public", type="boolean", nullable=false)
      */
-    private $quality;
+    private $public = true;
+
+
 
     /**
      * @return int
@@ -54,6 +77,22 @@ class Stream
     /**
      * @return string
      */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
     public function getPath()
     {
         return $this->path;
@@ -68,21 +107,36 @@ class Stream
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getQuality()
+    public function getState()
     {
-        return $this->quality;
+        return $this->state;
     }
 
     /**
-     * @param string $quality
+     * @param int $state
      */
-    public function setQuality($quality)
+    public function setState($state)
     {
-        $this->quality = $quality;
+        $this->state = $state;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * @param boolean $public
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+    }
 
 }
 

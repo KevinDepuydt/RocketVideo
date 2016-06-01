@@ -2,13 +2,14 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="fk_users_watchlist1_idx", columns={"watchlist_id"})})
+ * @ORM\Table(name="user")
  * @ORM\Entity
  */
 class User implements UserInterface
@@ -60,12 +61,10 @@ class User implements UserInterface
     /**
      * @var \AppBundle\Entity\Watchlist
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Watchlist")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="watchlist_id", referencedColumnName="id")
-     * })
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Watchlist",  cascade={"persist"})
      */
     private $watchlist;
+    
 
     /**
      * @return int
@@ -163,20 +162,15 @@ class User implements UserInterface
         $this->roles = $roles;
     }
 
-    /**
-     * @return Watchlist
-     */
+
+    public function setWatchlist(Watchlist $watchlist)
+    {
+        $this->watchlist = $watchlist;
+    }
+
     public function getWatchlist()
     {
         return $this->watchlist;
-    }
-
-    /**
-     * @param Watchlist $watchlist
-     */
-    public function setWatchlist($watchlist)
-    {
-        $this->watchlist = $watchlist;
     }
 
     public function eraseCredentials()

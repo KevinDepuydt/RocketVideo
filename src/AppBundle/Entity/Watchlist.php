@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,26 +23,55 @@ class Watchlist
     private $id;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var array
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Videos", inversedBy="watchlist")
-     * @ORM\JoinTable(name="watchlist_has_videos",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="watchlist_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="videos_id", referencedColumnName="id")
-     *   }
-     * )
+     * @ORM\Column(name="streams", type="array")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Stream", cascade={"persist"})
      */
-    private $videos;
+    private $streams;
+    
 
     /**
-     * Constructor
+     * @return int
      */
-    public function __construct()
+    public function getId()
     {
-        $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param Stream $stream
+     * @return $this
+     */
+    public function addStream(Stream $stream)
+    {
+        $this->streams[] = $stream;
+
+        return $this;
+    }
+
+    /**
+     * @param Stream $stream
+     */
+    public function removeStream(Stream $stream)
+    {
+        $this->streams->removeElement($stream);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getStreams()
+    {
+        return $this->streams;
     }
 
 }
