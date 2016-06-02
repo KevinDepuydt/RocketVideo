@@ -70,7 +70,7 @@ class User implements UserInterface
     /**
      * @var \AppBundle\Entity\Watchlist
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Watchlist",  cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Watchlist", cascade={"persist"})
      */
     private $watchlist;
     

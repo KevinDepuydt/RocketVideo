@@ -78,8 +78,8 @@
 
         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 margin-t-50">
             <h2 class="section-title margin-b-20 margin-t-50">Ma watchlist</h2>
-            {% if user.watchlist.streams %}
-                {% for stream in user.watchlist.streams %}
+            {% if user_streams %}
+                {% for stream in user_streams %}
                     <div class="stream-item stream-{% if stream.state == 0 %}not-download{% elseif stream.state == 1 %}in-download-progress{% else %}downloaded{% endif %}">
                         {{ stream.name }}
                         <div class="stream-item-action" title="Video {% if stream.state == 0 %}non téléchargée{% elseif stream.state == 1 %}en cours de téléchargement{% else %}a voir dès maintenant{% endif %}">

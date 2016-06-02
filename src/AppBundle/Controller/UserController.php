@@ -22,7 +22,6 @@ class UserController extends Controller
     public function registrerAction(Request $request)
     {
         $user = new User();
-        $watchlist = new Watchlist();
 
         $form = $this->createForm(UserTypeRegistration::class, $user);
         $form->handleRequest($request);
@@ -37,9 +36,7 @@ class UserController extends Controller
             $user->setPassword($encoded);
             $user->setSalt('');
             $user->setRoles(array('ROLE_USER'));
-            $user->setWatchlist($watchlist);
 
-            $em->persist($watchlist);
             $em->persist($user);
             $em->flush();
 
@@ -113,7 +110,8 @@ class UserController extends Controller
             'form_pass' => $form_pass->createView(),
             'user' => $user,
             'form_info_response' => $response_info,
-            'form_pass_response' => $response_pass
+            'form_pass_response' => $response_pass,
+            'user_streams' => $this->getDoctrine()->getRepository('AppBundle:Stream')->findBy(['user' => $user])
         ]);
     }
 }

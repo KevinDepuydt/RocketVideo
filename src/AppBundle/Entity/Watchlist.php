@@ -24,12 +24,18 @@ class Watchlist
 
     /**
      * @var array
+     * Owner side
      *
      * @ORM\Column(name="streams", type="array")
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Stream", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Stream", mappedBy="watchlist", cascade={"persist"})
      */
     private $streams;
-    
+
+    public function __construct()
+    {
+        $this->streams = new ArrayCollection();
+    }
+
 
     /**
      * @return int
@@ -53,7 +59,7 @@ class Watchlist
      */
     public function addStream(Stream $stream)
     {
-        $this->streams[] = $stream;
+        $this->streams->add($stream);
 
         return $this;
     }

@@ -23,7 +23,7 @@ class DefaultController extends Controller
             if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
                 $user = $this->get('security.token_storage')->getToken()->getUser();
                 $stream->setPublic(false);
-                $user->getWatchlist()->addStream($stream);
+                $stream->setUser($user);
             }
 
             // File name

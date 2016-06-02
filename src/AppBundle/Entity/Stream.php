@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,7 +57,17 @@ class Stream
      */
     private $public = true;
 
+    /**
+     * @var \AppBundle\Entity\User
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
+     */
+    private $user = null;
 
+
+    public function __construct()
+    {
+    }
 
     /**
      * @return int
@@ -136,6 +147,22 @@ class Stream
     public function setPublic($public)
     {
         $this->public = $public;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 }
