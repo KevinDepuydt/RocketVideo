@@ -42,7 +42,7 @@ class RetrieveVideoCommand extends ContainerAwareCommand
             $filename = $streamToDl->getName().".mp4";
 
             // create process
-            $process = new Process('youtube-dl -o '."web/downloads/".$filename.' '.$streamToDl->getPath());
+            $process = new Process('/usr/local/bin youtube-dl -o '."web/downloads/".$filename.' '.$streamToDl->getPath());
             $process->setTimeout(0);
 
             // set stream as started download
