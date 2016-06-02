@@ -10,25 +10,91 @@
     <h1 class="page-title margin-b-20 margin-t-50">Mon compte</h1>
 
     <div class="container">
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 margin-t-50">
-            <h3>Ma watchlist</h3>
+
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 margin-t-50">
             <div>
-                <p>ID {{ user.watchlist.id }}</p>
-                <ul>
-                    {% if user.watchlist.streams %}
-                        {% for stream in user.watchlist.streams %}
-                            <li>{{ stream.path }}</li>
-                        {% endfor %}
-                    {% endif %}
-                </ul>
+                <h2 class="section-title margin-b-20 margin-t-50">Mes informations</h2>
+                {% if form_info_response %}
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="alert-rv {% if form_info_response.success %}alert-rv-success{% else %}alert-rv-danger{% endif %}">
+                            {% if form_info_response.success %}
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            {% else %}
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_info_response.message }}
+                        </div>
+                    </div>
+                {% endif %}
+                {% spaceless %}
+                    {{ form_start(form_info, { 'attr': { 'class': 'update-user-form' }}) }}
+                    {{ form_errors(form_info) }}
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {{ form_row(form_info.username) }}
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {{ form_row(form_info.email) }}
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {{ form_row(form_info.save) }}
+                    </div>
+
+                    {{ form_end(form_info) }}
+                {% endspaceless %}
+            </div>
+            <div>
+                <h2 class="section-title margin-b-20 margin-t-50">Mon mot de passe</h2>
+                {% if form_pass_response %}
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="alert-rv {% if form_pass_response.success %}alert-rv-success{% else %}alert-rv-danger{% endif %}">
+                            {% if form_pass_response.success %}
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            {% else %}
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            {% endif %}
+                            {{ form_pass_response.message }}
+                        </div>
+                    </div>
+                {% endif %}
+                {% spaceless %}
+                    {{ form_start(form_pass, { 'attr': { 'class': 'update-user-form' }}) }}
+                    {{ form_errors(form_pass) }}
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {{ form_row(form_pass.old_password) }}
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {{ form_row(form_pass.password) }}
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {{ form_row(form_pass.save) }}
+                    </div>
+
+                    {{ form_end(form_pass) }}
+                {% endspaceless %}
             </div>
         </div>
 
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 margin-t-50">
-            <h3>Mes informations</h3>
-            <div>
-                Compte de l'utilisateur n° {{ user.id }} - {{ user.username }} ({{ user.email }})
-            </div>
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 margin-t-50">
+            <h2 class="section-title margin-b-20 margin-t-50">Ma watchlist</h2>
+            {% if user.watchlist.streams %}
+                {% for stream in user.watchlist.streams %}
+                    <div class="stream-item stream-{% if stream.state == 0 %}not-download{% elseif stream.state == 1 %}in-download-progress{% else %}downloaded{% endif %}">
+                        {{ stream.name }}
+                        <div class="stream-item-action" title="Video {% if stream.state == 0 %}non téléchargée{% elseif stream.state == 1 %}en cours de téléchargement{% else %}a voir dès maintenant{% endif %}">
+                            {% if stream.state == 0 %}
+                                <span><i class="fa fa-info" aria-hidden="true"></i></span>
+                            {% elseif stream.state == 1 %}
+                                <span><i class="fa fa-refresh fa-spin fa-fw"></i></span>
+                            {% else %}
+                                <a href="{{ path('app_play', { 'id': stream.id }) }}"><i class="fa fa-play" aria-hidden="true"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
+
     </div>
 {% endblock %}

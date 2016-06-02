@@ -48,7 +48,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=45, nullable=false)
+     * @ORM\Column(name="username", type="string", length=45, nullable=false, unique=true)
      * @Assert\Length(min=3, minMessage = "Le nom d'utilisateur est trop court")
      */
     private $username;
@@ -56,7 +56,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=255, nullable=false, unique=true)
+     * @ORM\Column(name="salt", type="string", length=255, nullable=false)
      */
     private $salt;
 

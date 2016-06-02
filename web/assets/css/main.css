@@ -284,6 +284,10 @@ form[name^="user_type_"] {
     margin: 15px auto;
 }
 
+.update-user-form {
+    max-width: none;
+}
+
 form[name^="user_type_"] div div, form[name^="user_type_"] input, form[name^="user_type_"] button{
     width: 100%;
 }
@@ -313,11 +317,15 @@ form[name^="user_type_"] button {
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid transparent;
+    color: white;
 }
 
 .alert-rv-danger {
-    color: white;
     background-color: #e74c3c;
+}
+
+.alert-rv-success {
+    background-color: #27ae60;
 }
 
 /** streams **/
