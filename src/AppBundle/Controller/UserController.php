@@ -27,27 +27,21 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $userRepo = $this->get('app.entity.user');
+            $em = $this->getDoctrine()->getManager();
             
-            if (!$userRepo->findOneBy(['username' => $user->getUsername(), 'email' => $user->getEmail()])) {
-                $em = $this->getDoctrine()->getManager();
+            $encoder = $this->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $user->getPassword());
 
-                $user->setSalt('');
-                $user->setRoles(array('ROLE_USER'));
-                $user->setWatchlist($watchlist);
+            $user->setPassword($encoded);
+            $user->setSalt('');
+            $user->setRoles(array('ROLE_USER'));
+            $user->setWatchlist($watchlist);
 
-                $em->persist($watchlist);
-                $em->persist($user);
-                $em->flush();
+            $em->persist($watchlist);
+            $em->persist($user);
+            $em->flush();
 
-                return $this->redirectToRoute('user_login');
-            } else {
-                if ($userRepo->findOneBy(['username' => $user->getUsername()])) {
-                    // set error username deja pris
-                } else if ($userRepo->findOneBy(['email' => $user->getEmail()])) {
-                    // set error email dejà pris
-                }
-            }
+            return $this->redirectToRoute('user_login');
         }
 
         return $this->render('AppBundle:User:registration.html.twig', [
