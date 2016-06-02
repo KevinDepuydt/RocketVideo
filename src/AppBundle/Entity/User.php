@@ -5,12 +5,16 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity
+ * @UniqueEntity("email", message="Cet e-mail est déjà pris")
+ * @UniqueEntity("username", message="Ce nom d'utilisateur est déjà pris")
  */
 class User implements UserInterface
 {
@@ -26,7 +30,11 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=150, nullable=false)
+     * @ORM\Column(name="email", type="string", length=150, nullable=false, unique=true)
+     * @Assert\Email(
+     *     message = "L'email {{ value }} n'est pas valide",
+     *     checkMX = true
+     * )
      */
     private $email;
 
@@ -41,13 +49,14 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=45, nullable=false)
+     * @Assert\Length(min=3, minMessage = "Le nom d'utilisateur est trop court")
      */
     private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=255, nullable=false)
+     * @ORM\Column(name="salt", type="string", length=255, nullable=false, unique=true)
      */
     private $salt;
 

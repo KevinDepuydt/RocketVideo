@@ -288,6 +288,20 @@ form[name^="user_type_"] div div, form[name^="user_type_"] input, form[name^="us
     width: 100%;
 }
 
+form[name^="user_type_"] ul {
+    padding: 0;
+    margin-bottom: 3px;
+}
+
+/** errors **/
+form[name^="user_type_"] ul li {
+    list-style: none;
+    padding: 5px 0;
+    text-align: left;
+    color: white;
+    border-bottom: 3px solid #e74c3c;
+}
+
 form[name^="user_type_"] button {
     line-height: 22px;
     padding-bottom: 13px;
