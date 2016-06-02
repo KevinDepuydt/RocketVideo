@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class UserTypeRegistration extends AbstractType
 {
@@ -35,13 +36,18 @@ class UserTypeRegistration extends AbstractType
                     'autocomplete' => 'off'
                 )
             ))
-            ->add('password', PasswordType::class, array(
-                'label' => false,
-                'attr' => array(
-                    'class' => 'input-rv',
+            ->add('password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les mots de passe ne correspondent pas',
+                'required' => true,
+                'first_options'  => array('label' => false, 'attr' => array(
                     'placeholder' => 'Mot de passe',
-                    'autocomplete' => 'off'
-                )
+                    'class' => 'input-rv'
+                )),
+                'second_options' => array('label' => false, 'attr' => array(
+                    'placeholder' => 'Vérification du mot de passe',
+                    'class' => 'input-rv'
+                ))
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Inscription',
