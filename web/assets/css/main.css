@@ -279,7 +279,7 @@ form div {
 }
 
 /** registration page **/
-form[name^="user_type_"] {
+form[name^="user_type_"], form[name^="stream_type"] {
     max-width: 600px;
     margin: 15px auto;
 }
@@ -288,17 +288,18 @@ form[name^="user_type_"] {
     max-width: none;
 }
 
-form[name^="user_type_"] div div, form[name^="user_type_"] input, form[name^="user_type_"] button{
+form[name^="user_type_"] div div, form[name^="user_type_"] input, form[name^="user_type_"] button,
+form[name^="stream_type_"] div div, form[name^="stream_type_"] input, form[name^="stream_type_"] button{
     width: 100%;
 }
 
-form[name^="user_type_"] ul {
+form[name^="user_type_"] ul, form[name^="stream_type_"] ul {
     padding: 0;
     margin-bottom: 3px;
 }
 
 /** errors **/
-form[name^="user_type_"] ul li {
+form[name^="user_type_"] ul li, form[name^="stream_type_"] ul li {
     list-style: none;
     padding: 5px 0;
     text-align: left;
@@ -306,7 +307,7 @@ form[name^="user_type_"] ul li {
     border-bottom: 3px solid #e74c3c;
 }
 
-form[name^="user_type_"] button {
+form[name^="user_type_"] button, form[name^="stream_type_"] button {
     line-height: 22px;
     padding-bottom: 13px;
 }
@@ -334,7 +335,7 @@ form[name^="user_type_"] button {
 }
 
 .stream-item {
-    padding: 10px 60px 10px 10px;
+    padding: 10px 80px 10px 10px;
     background-color: rgba(255, 255, 255, 0.2);
     margin: 5px;
     border-left: 10px solid white;
@@ -346,8 +347,8 @@ form[name^="user_type_"] button {
     position: absolute;
     right: 0;
     top: 0;
-    width: 50px;
     height: 100%;
+    padding: 0 5px;
     text-align: center;
 }
 
@@ -357,10 +358,10 @@ form[name^="user_type_"] button {
     transition: all 0.2s ease;
     position: relative;
     box-shadow: 0 0 0 white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
     text-decoration: none;
+    line-height: 50px;
+    margin: 0 3px;
 }
 
 .stream-item-action a:hover {
@@ -406,4 +407,16 @@ form[name^="user_type_"] button {
 
 .video-js:hover .vjs-big-play-button {
     color: #3498db;
+}
+
+/** stream update **/
+
+.update-stream-form label {
+    display: block;
+    text-align: left;
+}
+
+.update-stream-form input {
+    min-width: inherit;
+    margin-bottom: 10px;
 }

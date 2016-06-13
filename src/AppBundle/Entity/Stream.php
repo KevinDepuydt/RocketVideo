@@ -43,9 +43,6 @@ class Stream
     /**
      * @var int
      *
-     * O mean not downloaded
-     * 1 mean downloaded
-     *
      * @ORM\Column(name="state", type="integer", nullable=false)
      */
     private $state = self::STREAM_NOT_DOWNLOADED;
@@ -60,7 +57,7 @@ class Stream
     /**
      * @var \AppBundle\Entity\User
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      */
     private $user = null;
 

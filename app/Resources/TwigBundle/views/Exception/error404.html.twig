@@ -3,12 +3,13 @@
 {% block title %}{{ parent() }} - Not found{% endblock %}
 
 {% block body %}
-    <h1 class="site-title">{{ site_title }} <i class="fa fa-rocket" aria-hidden="true"></i></h1>
+
+    {# Include menu #}
+    {{ include("AppBundle::includes/menu.html.twig") }}
 
     <div class="container error-container">
         <p class="error-code">404</p>
         <p class="error-text margin-b-20">Not found</p>
-        <a href="{{ path('app_index') }}" class="btn-rv btn-rv-default">Retour à l'accueil</a>
     </div>
 
 {% endblock %}

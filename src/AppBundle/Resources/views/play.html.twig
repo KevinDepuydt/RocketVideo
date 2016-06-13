@@ -9,7 +9,7 @@
 
     <div class="container wait-container margin-t-50">
         <div class="blue-dark-bg">
-            <p>Lecture de la vidéo {{ stream.name }}</p>
+            <p>{{ stream.name }}</p>
 
             <video id="my-video" class="video-js" controls preload="auto" height="auto" data-setup="{}">
                 <source src="{{ download_dir }}/{{ stream.path }}" type='video/mp4'>

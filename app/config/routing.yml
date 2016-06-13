@@ -25,3 +25,13 @@ user_logout:
 user_account:
     path: /user/account
     defaults: { _controller: AppBundle:User:account }
+
+stream_edit:
+    path: /stream/edit/{id}
+    defaults:  { _controller: AppBundle:Stream:edit }
+    requirements:
+        id: \d+
+
+test_mail:
+    path: /mail/test
+    defaults:  { _controller: AppBundle:Default:testMail }

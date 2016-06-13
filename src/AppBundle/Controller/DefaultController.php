@@ -30,10 +30,14 @@ class DefaultController extends Controller
             do {
                 $stream->setName(uniqid());
             } while ($streamRepo->findByName($stream->getName()));
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($stream);
             $em->flush();
+
+            if (!$stream->isPublic()) {
+                return $this->redirectToRoute('user_account');
+            }
 
             $form = $this->createForm(StreamType::class, new Stream());
         }
@@ -53,12 +57,30 @@ class DefaultController extends Controller
             ->find($id);
 
         if (!$stream) {
-            throw $this->createNotFoundException('The product does not exist');
+            throw $this->createNotFoundException('The video does not exist');
         }
 
         return $this->render('AppBundle::play.html.twig', [
             'stream' => $stream
         ]);
 
+    }
+    
+    public function testMailAction() {
+        $name = "Kevin";
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Envoie d\'un email de test')
+            ->setFrom(['rocketvideosup@gmail.com' => "Rocket Vidéo"])
+            ->setTo('kevin.dpdt@gmail.com')
+            ->setContentType('text/html')
+            ->setBody(
+                $this->renderView(
+                    'AppBundle:Emails:video_downloaded.html.twig',
+                    array('stream_id' => 1)
+                )
+            )
+        ;
+        $this->get('mailer')->send($message);
+        return $this->redirectToRoute('app_index');
     }
 }

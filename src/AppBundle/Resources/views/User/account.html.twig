@@ -11,7 +11,7 @@
 
     <div class="container">
 
-        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 margin-t-50">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 margin-t-50">
             <div>
                 <h2 class="section-title margin-b-20 margin-t-50">Mes informations</h2>
                 {% if form_info_response %}
@@ -76,8 +76,8 @@
             </div>
         </div>
 
-        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 margin-t-50">
-            <h2 class="section-title margin-b-20 margin-t-50">Ma watchlist</h2>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 margin-t-50">
+            <h2 class="section-title margin-b-20 margin-t-50">Mes vidéos</h2>
             {% if user_streams %}
                 {% for stream in user_streams %}
                     <div class="stream-item stream-{% if stream.state == 0 %}not-download{% elseif stream.state == 1 %}in-download-progress{% else %}downloaded{% endif %}">
@@ -88,6 +88,7 @@
                             {% elseif stream.state == 1 %}
                                 <span><i class="fa fa-refresh fa-spin fa-fw"></i></span>
                             {% else %}
+                                <a href="{{ path('stream_edit', { 'id': stream.id }) }}"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 <a href="{{ path('app_play', { 'id': stream.id }) }}"><i class="fa fa-play" aria-hidden="true"></i></a>
                             {% endif %}
                         </div>
