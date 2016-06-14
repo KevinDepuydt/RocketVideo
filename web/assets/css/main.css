@@ -76,10 +76,10 @@ body {
     border-left: 10px solid rgba(255, 255, 255, 0.2);
     background-color: rgba(255, 255, 255, 0.2);
     position: relative;
+    text-align: left;
 }
 
 .notice-error {
-    text-align: left;
     border-left: 10px solid rgba(255, 255, 255, 0.2);
     background-color: #e74c3c !important;
     color: white;

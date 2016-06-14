@@ -9,6 +9,14 @@
 
     <div class="container wait-container margin-t-50">
         {% if stream is not null %}
+            {% if stream.public %}
+                <div class="notice">
+                    <div class="notice-icon">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    </div>
+                    <p>Cette vidéo est publique</p>
+                </div>
+            {% endif %}
             <div class="blue-dark-bg">
                 <p class="video-title ">
                     {{ stream.name }}
