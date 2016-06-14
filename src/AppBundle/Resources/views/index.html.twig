@@ -44,6 +44,13 @@
                     </div>
                 </div>
             {% endfor %}
+        {% else %}
+            <div class="notice">
+                <div class="notice-icon">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </div>
+                <p>Il n'y a pas encore de vidéo publique</p>
+            </div>
         {% endif %}
     </div>
 {% endblock %}
