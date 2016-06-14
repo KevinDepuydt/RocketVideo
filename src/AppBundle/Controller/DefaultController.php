@@ -58,12 +58,20 @@ class DefaultController extends Controller
 
         if (!$stream) {
             throw $this->createNotFoundException('The video does not exist');
+        } else {
+
+            if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+                $user = $this->get('security.token_storage')->getToken()->getUser();
+            }
+
+            if ($stream->getState() != Stream::STREAM_DOWNLOADED || empty($user) || !$stream->isPublic() && $user != $stream->getUser()) {
+                $stream = null;
+            }
         }
 
         return $this->render('AppBundle::play.html.twig', [
             'stream' => $stream
         ]);
-
     }
     
     public function testMailAction() {

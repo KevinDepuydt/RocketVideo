@@ -8,19 +8,36 @@
     {{ include("AppBundle::includes/menu.html.twig") }}
 
     <div class="container wait-container margin-t-50">
-        <div class="blue-dark-bg">
-            <p>{{ stream.name }}</p>
-
-            <video id="my-video" class="video-js" controls preload="auto" height="auto" data-setup="{}">
-                <source src="{{ download_dir }}/{{ stream.path }}" type='video/mp4'>
-                <p class="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to a web browser that
-                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                </p>
-            </video>
-        </div>
+        {% if stream is not null %}
+            <div class="blue-dark-bg">
+                <p class="video-title ">{{ stream.name }} <a href="{{ path('stream_edit', { 'id': stream.id }) }}" class="pull-right" title="Modifier"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+                <video id="my-video" class="video-js" controls preload="auto" height="auto" data-setup="{}">
+                    <source src="{{ download_dir }}/{{ stream.path }}" type='video/mp4'>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
+        {% else %}
+            <div class="notice notice-error">
+                <div class="notice-icon">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </div>
+                <p>Cette video n'est pas disponible</p>
+            </div>
+        {% endif %}
     </div>
 
     <div class="container play-container margin-t-50">
     </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $("#my-video").on('contextmenu', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
 {% endblock %}

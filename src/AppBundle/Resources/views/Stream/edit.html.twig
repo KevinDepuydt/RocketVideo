@@ -24,4 +24,8 @@
             {{ form_end(form) }}
         {% endspaceless %}
     </div>
+
+    <div class="container margin-t-100 align-center">
+        <a href="{{ path('app_play', { 'id': stream.id }) }}" class="btn-rv btn-rv-default btn-play-video" title="Voir"><i class="fa fa-play" aria-hidden="true"></i></a>
+    </div>
 {% endblock %}

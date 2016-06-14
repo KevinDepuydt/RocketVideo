@@ -78,6 +78,13 @@ body {
     position: relative;
 }
 
+.notice-error {
+    text-align: left;
+    border-left: 10px solid rgba(255, 255, 255, 0.2);
+    background-color: #e74c3c !important;
+    color: white;
+}
+
 .notice-icon {
     position: absolute;
     left: 0;
@@ -125,6 +132,13 @@ body {
     margin-top: 50px;
 }
 
+.margin-t-100 {
+    margin-top: 100px;
+}
+
+.align-center {
+    text-align: center;
+}
 /** errors **/
 .error-container {
     text-align: center;
@@ -252,6 +266,11 @@ form div {
     font-size: 18px;
 }
 
+.btn-play-video {
+    padding: 40px 45px !important;
+    font-size: 42px;
+}
+
 .input-add-video {
     padding: 15px;
     min-width: 600px;
@@ -274,6 +293,17 @@ form div {
 }
 
 /** play page **/
+.video-title {
+    font-family: "LatoBold", Arial, sans-serif;
+    height: 42px;
+    line-height: 40px;
+    font-size: 24px;
+}
+
+.video-title i {
+    font-size: 36px !important;
+}
+
 .wait-container .create-account {
     text-align: left;
 }
