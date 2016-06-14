@@ -64,7 +64,7 @@ class DefaultController extends Controller
                 $user = $this->get('security.token_storage')->getToken()->getUser();
             }
 
-            if ($stream->getState() != Stream::STREAM_DOWNLOADED || empty($user) || !$stream->isPublic() && $user != $stream->getUser()) {
+            if ($stream->getState() != Stream::STREAM_DOWNLOADED || !$stream->isPublic() && isset($user) && $user != $stream->getUser()) {
                 $stream = null;
             }
         }
