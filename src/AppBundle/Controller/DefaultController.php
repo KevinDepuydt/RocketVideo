@@ -70,7 +70,8 @@ class DefaultController extends Controller
         }
 
         return $this->render('AppBundle::play.html.twig', [
-            'stream' => $stream
+            'stream' => $stream,
+            'show_edit' => isset($user) ? $user == $stream->getUser() : false,
         ]);
     }
     

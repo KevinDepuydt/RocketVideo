@@ -10,7 +10,12 @@
     <div class="container wait-container margin-t-50">
         {% if stream is not null %}
             <div class="blue-dark-bg">
-                <p class="video-title ">{{ stream.name }} <a href="{{ path('stream_edit', { 'id': stream.id }) }}" class="pull-right" title="Modifier"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+                <p class="video-title ">
+                    {{ stream.name }}
+                    {% if show_edit %}
+                        <a href="{{ path('stream_edit', { 'id': stream.id }) }}" class="pull-right" title="Modifier"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    {% endif %}
+                </p>
                 <video id="my-video" class="video-js" controls preload="auto" height="auto" data-setup="{}">
                     <source src="{{ download_dir }}/{{ stream.path }}" type='video/mp4'>
                     <p class="vjs-no-js">
