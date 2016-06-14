@@ -458,8 +458,7 @@ form[name^="user_type_"] button, form[name^="stream_type_"] button {
     }
 }
 
-@media screen and (min-width: 500px){
-
+@media screen and (max-width: 700px){
     #menu .container {
         display: inherit;
         align-items: center;
@@ -470,7 +469,9 @@ form[name^="user_type_"] button, form[name^="stream_type_"] button {
         line-height: 70px;
         text-align: center;
     }
+}
 
+@media screen and (min-width: 500px){
     form[name="stream"] div {
         width: 100%;
     }
@@ -495,17 +496,6 @@ form[name^="user_type_"] button, form[name^="stream_type_"] button {
 }
 
 @media screen and (max-width: 499px){
-
-    #menu .container {
-        display: inherit;
-        align-items: center;
-    }
-
-    #menu .container .right {
-        height: 70px;
-        line-height: 70px;
-        text-align: center;
-    }
 
     form[name="stream"] div {
         width: 100%;
