@@ -234,11 +234,6 @@ body {
     border-bottom: 1px solid #223345;
 }
 
-#menu .container {
-    display: flex;
-    align-items: center;
-}
-
 #menu .container .right {
     margin-left: auto;
 }
@@ -271,25 +266,8 @@ form div {
     font-size: 42px;
 }
 
-.input-add-video {
-    padding: 15px;
-    min-width: 600px;
-    transition: all 0.2s ease;
-    font-family: "Lato", Arial, sans-serif;
-    outline: none;
-    border: 1px solid #34495e;
-    border-right: none;
-    text-indent: 10px;
-    color: #222;
-}
-
 .input-add-video:focus {
     box-shadow: 10px 0 0 #e74c3c inset;
-}
-
-.btn-add-video {
-    padding: 15px !important;
-    border-left: none;
 }
 
 /** play page **/
@@ -449,4 +427,112 @@ form[name^="user_type_"] button, form[name^="stream_type_"] button {
 .update-stream-form input {
     min-width: inherit;
     margin-bottom: 10px;
+}
+
+@media screen and (min-width: 700px){
+
+    #menu .container {
+        display: flex;
+        align-items: center;
+    }
+
+    form[name="stream"] div {
+        width: inherit !important;
+    }
+
+    .btn-add-video {
+        padding: 15px !important;
+        border-left: none;
+    }
+
+    .input-add-video {
+        padding: 15px;
+        min-width: 500px;
+        transition: all 0.2s ease;
+        font-family: "Lato", Arial, sans-serif;
+        outline: none;
+        border: 1px solid #34495e;
+        border-right: none;
+        text-indent: 10px;
+        color: #222;
+    }
+}
+
+@media screen and (min-width: 500px){
+
+    #menu .container {
+        display: inherit;
+        align-items: center;
+    }
+
+    #menu .container .right {
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+    }
+
+    form[name="stream"] div {
+        width: 100%;
+    }
+
+    .btn-add-video {
+        width: 100%;
+        padding: 15px !important;
+        border-left: none;
+    }
+
+    .input-add-video {
+        padding: 15px;
+        width: 100%;
+        transition: all 0.2s ease;
+        font-family: "Lato", Arial, sans-serif;
+        outline: none;
+        border: 1px solid #34495e;
+        border-right: none;
+        text-indent: 10px;
+        color: #222;
+    }
+}
+
+@media screen and (max-width: 499px){
+
+    #menu .container {
+        display: inherit;
+        align-items: center;
+    }
+
+    #menu .container .right {
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+    }
+
+    form[name="stream"] div {
+        width: 100%;
+    }
+
+    .btn-add-video {
+        width: 100%;
+        padding: 15px !important;
+        border-left: none;
+    }
+
+    .input-add-video {
+        padding: 15px;
+        width: 100%;
+        transition: all 0.2s ease;
+        font-family: "Lato", Arial, sans-serif;
+        outline: none;
+        border: 1px solid #34495e;
+        border-right: none;
+        text-indent: 10px;
+        color: #222;
+    }
+}
+
+@media screen and (max-width: 325px) {
+    #menu .container .left i {
+        margin: 10px 0 5px;
+        font-size: 60px;
+    }
 }
